@@ -7,12 +7,16 @@ public class Product {
     private final String category;
     private int viewCount;
     private int stock;
+    private int price;
+    private int ratings;
 
-    public Product(String id, String name, String category, int stock) {
+    public Product(String id, String name, String category, int stock, int price, int ratings) {
         this.id       = id;
         this.name     = name;
         this.category = category;
         this.stock    = stock;
+        this.price     = price;
+        this.ratings  = ratings;
     }
 
     public void incrementViewCount()         { this.viewCount++; }
@@ -23,4 +27,10 @@ public class Product {
     public String getCategory()  { return category; }
     public int    getViewCount() { return viewCount; }
     public int    getStock()     { return stock; }
+    public int getPrice() {
+        return price;
+    }
+    public int getRatings() {
+        return ratings;
+    }
 }
