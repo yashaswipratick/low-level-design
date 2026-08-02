@@ -5,6 +5,45 @@
 
 ---
 
+## 🗺️ Recommended Path (Wibey-Advised — Updated Aug 2026)
+
+> This is the **actual sequence to follow** based on current progress.
+
+```
+Step 1 → ✅ SOLID — ALL DONE (SRP, OCP, LSP, ISP, DIP all coded)
+Step 2 → ⏱️ 15-min mental check: Composition vs Aggregation (Phase 4 — before Decorator/Composite)
+Step 3 → 🟢 Phase 6 — Design Patterns in THIS order:
+            Behavioral first: Strategy → State → Observer → CoR → Command (then rest)
+            Creational next:  Singleton → Builder → Factory → Abstract Factory
+            Structural last:  Adapter → Facade → Decorator (then rest)
+Step 4 → Phase 5 — UML ALONGSIDE patterns (draw class diagram per pattern, not a separate week)
+Step 5 → Phase 3 — Clean Code AFTER patterns (refactor your own pattern code — double learning)
+```
+
+**Why Behavioral first? (Your instinct is correct)**
+- Strategy, State, Observer, CoR, Command appear in **every single Phase 8 problem**
+- Learning Creational first (old textbook order) means learning patterns you won't USE for weeks
+- Behavioral first = you can start Phase 8 problems much earlier
+- Creational/Structural are simpler — easier to pick up after your brain is warmed up
+
+---
+
+## 📊 Current Progress (as of Aug 2, 2026)
+
+| Phase | Theory | Java Code | Status |
+|-------|--------|-----------|--------|
+| Phase 1 — OOP | ✅ GUIDE.md | ❌ | ✅ Theory done |
+| Phase 2 — SOLID | ✅ GUIDE.md | ✅ SRP, OCP, LSP, ISP, DIP — all done | ✅ Complete |
+| Phase 3 — Clean Code | ✅ GUIDE.md | ❌ | Pending (do after patterns) |
+| Phase 4 — Object Relationships | ✅ GUIDE.md | ❌ | 15-min mental check before patterns |
+| Phase 5 — UML | ✅ GUIDE.md | — | Learn alongside Phase 6 |
+| Phase 6 — Design Patterns | ✅ All 3 GUIDEs | ❌ | **🟢 START HERE** |
+| Phase 7 — Refactoring | ❌ | ❌ | Not started |
+| Phase 8 — LLD Problems | ✅ All PROBLEM.mds | ❌ | Pending |
+| Phase 9 — Advanced | ✅ GUIDE.md + all PROBLEM.mds | ❌ | Pending |
+
+---
+
 ## How This Works
 
 | Rule | Detail |
@@ -31,119 +70,199 @@ Month 3 → Real Problems + Mocks (Weeks 9–12)
 ---
 
 ## MONTH 1 — FOUNDATIONS SPRINT
-
-### Week 1 — OOP Deep Dive (Accelerated for 10yr Engineers)
-> You know syntax. Now we fix the THINKING.
-
-**Day 1–2: OOP Revisited with Production Eyes**
-- [ ] Encapsulation — why `public` fields are a design crime
-- [ ] Abstraction — `abstract class` vs `interface` — the real decision tree
-- [ ] Inheritance — when IS-A becomes a trap (Square/Rectangle problem)
-- [ ] Polymorphism — runtime dispatch, method hiding vs overriding
-
-**Day 3–4: Object Relationships (the ones interviews ask about)**
-- [ ] Association vs Aggregation vs Composition — with memory ownership
-- [ ] Dependency — the silent coupling killer
-- [ ] How Spring Boot's `@Autowired` relates to Dependency Injection
-
-**Day 5–7: Code Smells (22 smells, recognize all)**
-- [ ] God Class, Feature Envy, Primitive Obsession
-- [ ] Inappropriate Intimacy, Shotgun Surgery, Divergent Change
-- [ ] Long Method, Long Parameter List, Data Clumps
-- **Homework:** Find 5 smells in a real Spring Boot codebase you've worked on
+> ⚠️ **Reordered** from original plan — follow the Recommended Path sequence above.
 
 ---
 
-### Week 2 — SOLID Principles (The Backbone of Every Interview)
+### Week 1 — OOP Deep Dive ✅ DONE (Theory)
+> Guide is complete. No code needed at this stage — revisit as needed.
+
+**Day 1–2: OOP Revisited with Production Eyes**
+- [x] Encapsulation — why `public` fields are a design crime
+- [x] Abstraction — `abstract class` vs `interface` — the real decision tree
+- [x] Inheritance — when IS-A becomes a trap (Square/Rectangle problem)
+- [x] Polymorphism — runtime dispatch, method hiding vs overriding
+
+**Day 3–4: Object Relationships (covered briefly)**
+- [x] Association vs Aggregation vs Composition — with memory ownership
+- [x] Dependency — the silent coupling killer
+- [x] How Spring Boot's `@Autowired` relates to Dependency Injection
+
+**Day 5–7: Code Smells (22 smells, recognize all)**
+- [x] God Class, Feature Envy, Primitive Obsession
+- [x] Inappropriate Intimacy, Shotgun Surgery, Divergent Change
+- [x] Long Method, Long Parameter List, Data Clumps
+
+---
+
+### Week 2 — SOLID Principles 🔄 IN PROGRESS
 > Every interviewer asks SOLID. Every candidate gives textbook answers. You won't.
 
-**Day 1: S — Single Responsibility Principle**
-- [ ] Not just "one class, one job" — it's "one reason to change"
-- [ ] Classic Spring Boot violation: `UserService` doing auth + email + persistence
-- [ ] Bad code → Refactored code → Why it matters in production
+**S — Single Responsibility Principle** ✅
+- [x] Not just "one class, one job" — it's "one reason to change"
+- [x] Classic Spring Boot violation: `UserService` doing auth + email + persistence
+- [x] Bad code → Refactored code → Why it matters in production
 
-**Day 2: O — Open/Closed Principle**
-- [ ] Strategy pattern is OCP in action
-- [ ] Classic violation: giant `if/else` for payment types
-- [ ] Bad code → Refactored code
+**O — Open/Closed Principle** ✅
+- [x] Strategy pattern is OCP in action
+- [x] Classic violation: giant `if/else` for payment types
+- [x] Bad code → Refactored code
 
-**Day 3: L — Liskov Substitution Principle (trickiest)**
-- [ ] The Square-Rectangle trap — deep explanation
-- [ ] The Bird-Penguin trap — deep explanation
-- [ ] How to identify LSP violations in interfaces
-- [ ] Contract-based thinking
+**L — Liskov Substitution Principle** ✅
+- [x] The Square-Rectangle trap — deep explanation
+- [x] The Bird-Penguin trap — deep explanation
+- [x] How to identify LSP violations in interfaces
+- [x] Contract-based thinking
 
-**Day 4: I — Interface Segregation Principle**
-- [ ] Fat interfaces vs lean interfaces
-- [ ] `Comparable` vs `Comparator` as a real Java example
+**I — Interface Segregation Principle** ✅
+- [x] Fat interfaces vs lean interfaces
+- [x] `Comparable` vs `Comparator` as a real Java example
 
-**Day 5–7: D — Dependency Inversion Principle**
+**D — Dependency Inversion Principle** 🔄 REMAINING
+- [ ] Finish DIP practice problems (problems 1–4 in `phase-2-solid/dip/`)
 - [ ] High-level modules must NOT depend on low-level modules
 - [ ] How Spring IoC container implements DIP
 - [ ] Constructor injection vs field injection — which and WHY
-- **Mock Interview #1:** Full SOLID round (30 min)
+- [ ] Review analytics problem (problem-3) and field injection problem (problem-2)
+- **Mock Interview #1:** Full SOLID round (30 min) — do after DIP is complete
 
 ---
 
-### Week 3 — Design Patterns: Creational + Structural
-> Don't just know the pattern. Know WHEN to use it and WHEN NOT to.
+### Week 2.5 — Phase 4 Quick Sprint: Composition vs Aggregation (1 hour only)
+> ⏱️ **Timebox: 60 minutes max.** You only need ONE concept from Phase 4 right now.
 
-**Creational Patterns (Day 1–3)**
-- [ ] **Singleton** — 6 implementations, thread safety, enum singleton (interview favorite)
-- [ ] **Factory Method** — vs Simple Factory (many confuse these)
-- [ ] **Abstract Factory** — UI toolkit example
-- [ ] **Builder** — telescoping constructor problem, fluent API
-- [ ] **Prototype** — deep vs shallow copy, `Cloneable` pitfalls in Java
+**The one thing you must deeply understand before patterns:**
+- [ ] **Composition** — child cannot exist without parent (Order → OrderItems). Parent owns the lifecycle.
+- [ ] **Aggregation** — child can exist independently (Team → Players). Parent references, doesn't own.
+- [ ] Why Composite pattern = Composition. Why Decorator = wraps without owning.
+- [ ] Why Spring `@Autowired` beans are Aggregation (Spring owns lifecycle, not your class).
+- [ ] Sketch: draw 3 examples of Composition and 3 of Aggregation from systems you've built.
 
-**Structural Patterns (Day 4–7)**
-- [ ] **Adapter** — legacy system integration (classic interview scenario)
-- [ ] **Facade** — your `@Service` layer IS a facade (connection to Spring)
-- [ ] **Decorator** — Java I/O streams, how it beats inheritance
-- [ ] **Proxy** — Virtual, Protection, Logging proxy | Spring AOP is a proxy
-- [ ] **Composite** — file system, UI component trees
-- [ ] **Bridge** — abstraction vs implementation axis
-- [ ] **Flyweight** — `String.intern()`, `Integer.valueOf()` — Java already uses this
-- **Mock Interview #2:** Pick a pattern, design on the fly (30 min)
+> **Do NOT do the full Phase 4 guide now.** Come back to it in Week 5 with pattern context.
 
 ---
 
-### Week 4 — Design Patterns: Behavioral + UML
-> Behavioral patterns are what interviewers love to ask for real problems.
+### Week 2.5 — Phase 4 Quick Sprint: Composition vs Aggregation (15 min mental check)
+> ⏱️ **Timebox: 15 minutes.** DIP is done. You just need to lock down this one concept before Decorator and Composite patterns.
 
-**Behavioral Patterns (Day 1–5)**
-- [ ] **Strategy** — algorithm family, replaces switch statements
-- [ ] **Observer** — event systems, Spring events, pub/sub
-- [ ] **Command** — undo/redo, task queues, request encapsulation
-- [ ] **State** — Order state machine, elevator states, vending machine
-- [ ] **Template Method** — Hollywood Principle, abstract base classes
-- [ ] **Chain of Responsibility** — filter chains, middleware, Spring Security
-- [ ] **Iterator** — custom iterators, `Iterable<T>` in Java
-- [ ] **Mediator** — chat room, air traffic control
-- [ ] **Memento** — snapshot/restore, undo systems
-- [ ] **Visitor** — double dispatch, AST traversal
-- [ ] **Interpreter** — expression parsing (rare but asked)
+**The one thing you must deeply understand before patterns:**
+- [ ] **Composition** — child cannot exist without parent (Order → OrderItems). Parent owns the lifecycle.
+- [ ] **Aggregation** — child can exist independently (Team → Players). Parent references, doesn't own.
+- [ ] Why `Composite` pattern uses Composition. Why `Decorator` wraps (aggregates) without owning.
+- [ ] Why Spring `@Autowired` beans are Aggregation (Spring owns lifecycle, not your class).
 
-**UML (Day 6–7)**
-- [ ] Class Diagram — read and draw in 5 minutes
-- [ ] Sequence Diagram — method call flows
-- [ ] State Diagram — object lifecycle
-- [ ] How to draw UML on a whiteboard in an interview
-- **Mock Interview #3:** Design Patterns round (45 min)
+> **Done in 15 min? Move on.** Full Phase 4 review happens in Week 5 with pattern context.
+
+---
+
+### Week 3 — Phase 6: Design Patterns — Behavioral (HIGH PRIORITY)
+> ⚡ **Your order, your instinct is right.** Behavioral patterns appear in 80% of all LLD interview problems. Learn these first.
+> *(Phase 5 UML alongside — draw a class diagram for EVERY pattern)*
+
+**📐 UML Rule:** After each pattern, draw its class diagram. Takes 5 min. Embeds the structure permanently.
+
+**Priority 5 — The Patterns That Drive Every Real-World System**
+
+- [ ] **1. Strategy** — algorithm family, replaces if/else chains, pluggable behaviour
+  - 📐 *UML: Context → Strategy (interface) ← ConcreteStrategyA / B / C*
+  - 🔗 *Used in: every payment system, pricing engine, sorting, routing*
+
+- [ ] **2. State** — object behaves differently based on internal state, eliminates giant switch
+  - 📐 *UML: Context → State (interface) ← ConcreteState(A/B/C) + State Diagram*
+  - 🔗 *Used in: Order lifecycle, Vending Machine, Elevator, ATM*
+
+- [ ] **3. Observer** — one change, many listeners; decouples event source from handlers
+  - 📐 *UML: Subject → Observer (interface) ← ConcreteObservers + sequence diagram*
+  - 🔗 *Used in: Notification system, Stock alerts, Spring events, pub/sub*
+
+- [ ] **4. Chain of Responsibility** — pass request down a handler chain until one handles it
+  - 📐 *UML: Handler (abstract) with next: Handler → ConcreteHandlers*
+  - 🔗 *Used in: Spring Security filters, middleware, validation pipelines, fraud checks*
+
+- [ ] **5. Command** — encapsulate request as object; enables undo/redo, queuing, logging
+  - 📐 *UML: Command (interface) ← ConcreteCommand → Receiver + Invoker*
+  - 🔗 *Used in: Order operations, undo/redo editors, task queues, audit logs*
+
+**Remaining Behavioral (cover after the priority 5)**
+- [ ] **Template Method** — define algorithm skeleton, let subclasses fill in steps
+- [ ] **Iterator** — traverse collection without exposing internals (`Iterable<T>` in Java)
+- [ ] **Mediator** — central hub for object communication (chat room, ATC)
+- [ ] **Memento** — snapshot + restore (undo systems)
+- [ ] **Visitor** — double dispatch, add operations to objects without modifying them
+- [ ] **Interpreter** — expression parsing (rare, but asked for Rule Engine problems)
+
+- **Mock Interview #2:** Design a Notification System using Observer + Strategy + CoR (45 min)
+
+---
+
+### Week 4 — Phase 6: Design Patterns — Creational + Structural
+
+**Creational (Day 1–3) — Your Order**
+
+- [ ] **1. Singleton** — 6 implementations, thread safety, enum singleton (interview favorite)
+  - 📐 *UML: private constructor + static getInstance()*
+  - ⚠️ *Know: eager vs lazy vs double-checked vs enum — and WHY enum is best*
+
+- [ ] **2. Builder** — telescoping constructor problem, fluent API, immutable objects
+  - 📐 *UML: Builder inner class + chained setters + build()*
+  - 🔗 *Used in: every complex object (Order, Notification, HTTP request)*
+
+- [ ] **3. Factory Method** — delegate object creation to subclasses
+  - 📐 *UML: Creator (abstract) ← ConcreteCreator → Product*
+  - ⚠️ *Know the difference: Simple Factory ≠ Factory Method ≠ Abstract Factory*
+
+- [ ] **4. Abstract Factory** — create families of related objects without specifying concrete classes
+  - 📐 *UML: two product families across two factories*
+
+- [ ] **Prototype** — deep vs shallow copy, `Cloneable` pitfalls (lower priority, know it exists)
+
+**Structural (Day 4–7) — Your Order**
+
+- [ ] **1. Adapter** — make incompatible interfaces work together (legacy system integration)
+  - 📐 *UML: Target interface + Adaptee + Adapter (wraps Adaptee)*
+  - 🔗 *Used in: integrating third-party SDKs, legacy code, payment providers*
+
+- [ ] **2. Facade** — simplified interface over a complex subsystem
+  - 📐 *UML: Facade hiding 3–5 subsystem classes*
+  - 🔗 *Your `@Service` layer in Spring Boot IS a Facade*
+
+- [ ] **3. Decorator** — add behaviour at runtime by wrapping (beats inheritance for this)
+  - 📐 *UML: Component (interface) ← ConcreteComponent + Decorator (has-a Component) ← ConcreteDecorators*
+  - 🔗 *Used in: Java I/O streams, retry wrappers, logging wrappers, auth decorators*
+
+**Remaining Structural (know the concept, not deep-dive required)**
+- [ ] **Proxy** — control access to an object (Spring AOP is a proxy)
+- [ ] **Composite** — tree structures where leaf and composite are treated the same (File System)
+- [ ] **Bridge** — separate abstraction from implementation (two independent class hierarchies)
+- [ ] **Flyweight** — share common state across many objects (`String.intern()`, `Integer.valueOf()`)
+
+- **Mock Interview #3:** Design a Logger Framework using Singleton + CoR + Strategy + Decorator (45 min)
 
 ---
 
 ## MONTH 2 — PATTERN MASTERY + REAL PROBLEMS
 
-### Week 5 — Pattern Combinations + Clean Code
-> Real systems use patterns together. Interviews test if you know this.
+### Week 5 — Phase 3 Clean Code + Pattern Combinations
+> Clean Code AFTER patterns = you refactor your own pattern code. Double learning.
 
-- [ ] **Pattern combos:** Observer + Strategy (Notification System)
-- [ ] **Pattern combos:** State + Command (Order Workflow)
-- [ ] **Pattern combos:** Decorator + Chain of Responsibility (Middleware)
-- [ ] **Pattern combos:** Factory + Strategy (Payment Processing)
-- [ ] Clean Code naming, methods, classes (the stuff 10-yr engineers still get wrong)
-- [ ] Refactoring legacy code — identify smell → choose pattern → apply
-- **Homework:** Take a production class you've written. Find 3 improvements.
+**Phase 3 — Clean Code (Day 1–2)**
+- [ ] Naming: classes, methods, variables — the rules that 10-yr engineers still get wrong
+- [ ] Method design: do one thing, one level of abstraction
+- [ ] Class design: small, cohesive, tell-don't-ask
+- [ ] Error handling: exceptions as domain vocabulary
+- [ ] **Exercise:** Take your Week 3 Decorator implementation. Apply all Clean Code rules. Count improvements.
+
+**Pattern Combinations (Day 3–5)**
+- [ ] **Observer + Strategy** — Notification System (who to notify + how to notify)
+- [ ] **State + Command** — Order Workflow (state decides if command allowed)
+- [ ] **Decorator + Chain of Responsibility** — Middleware pipeline
+- [ ] **Factory + Strategy** — Payment Processing (factory creates right strategy)
+
+**Phase 4 Full Review (Day 6–7)**
+- [ ] Now revisit Phase 4 in full with pattern context
+- [ ] Association, Aggregation, Composition, Dependency — examples using patterns you just learned
+- [ ] UML notation for all 4 relationship types
+- **Homework:** Take a production class you've written. Find 3 improvements using Clean Code + patterns.
 
 ---
 
@@ -254,19 +373,19 @@ Month 3 → Real Problems + Mocks (Weeks 9–12)
 
 ## Mock Interview Schedule
 
-| # | Week | Topic | Duration |
-|---|------|-------|----------|
-| 1 | 2 | SOLID deep-dive | 30 min |
-| 2 | 3 | Creational + Structural patterns | 30 min |
-| 3 | 4 | Behavioral patterns | 45 min |
-| 4 | 6 | LRU Cache live design | 45 min |
-| 5 | 7 | Elevator System live design | 45 min |
-| 6 | 8 | BookMyShow live design | 60 min |
-| 7 | 9 | Uber live design | 60 min |
-| 8 | 10 | Low Stock Alert System | 60 min |
-| 9 | 11 | Advanced topics | 45 min |
-| 10 | 12 | Full mock (unknown problem) | 90 min |
-| 11 | 12 | Full mock (Walmart-style) | 90 min |
+| # | When | Topic | Duration | Status |
+|---|------|-------|----------|--------|
+| 1 | After Week 2 (DIP done) | Full SOLID round | 30 min | ⏳ Pending |
+| 2 | After Week 3 | Creational + Structural patterns | 30 min | ⏳ Pending |
+| 3 | After Week 4 | Behavioral patterns | 45 min | ⏳ Pending |
+| 4 | Week 6 | LRU Cache live design | 45 min | ⏳ Pending |
+| 5 | Week 7 | Elevator System live design | 45 min | ⏳ Pending |
+| 6 | Week 8 | BookMyShow live design | 60 min | ⏳ Pending |
+| 7 | Week 9 | Uber live design | 60 min | ⏳ Pending |
+| 8 | Week 10 | Low Stock Alert System | 60 min | ⏳ Pending |
+| 9 | Week 11 | Advanced topics | 45 min | ⏳ Pending |
+| 10 | Week 12 | Full mock (unknown problem) | 90 min | ⏳ Pending |
+| 11 | Week 12 | Full mock (Walmart-style) | 90 min | ⏳ Pending |
 
 ---
 
