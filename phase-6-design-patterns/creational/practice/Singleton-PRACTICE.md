@@ -270,6 +270,116 @@ class Main {
 
 ---
 
+## 📖 Double-Checked Locking — Reference Guide
+
+> Use this when you need **lazy + thread-safe** Singleton initialization.
+
+### The Problem It Solves
+
+Without synchronization, two threads can both see `instance == null` at the same time and both create a new instance → Singleton broken.
+
+Synchronizing the entire `getInstance()` method works but is slow — every call acquires a lock even after the instance is created.
+
+### The Pattern
+
+```java
+private static volatile MyClass instance;  // volatile is REQUIRED
+
+public static MyClass getInstance() {
+    if (instance == null) {                    // Check 1 — no lock, fast path
+        synchronized (MyClass.class) {         // Lock acquired only during first creation
+            if (instance == null) {            // Check 2 — inside lock, safe
+                instance = new MyClass();      // Create ONLY here
+            }
+        }
+    }
+    return instance;
+}
+```
+
+### Why Two Checks?
+
+| Check | Purpose |
+|-------|---------|
+| Outer `if (instance == null)` | Fast path — skips lock entirely after instance is created (99.99% of calls) |
+| Inner `if (instance == null)` | Safety net — another thread may have created it while we waited for the lock |
+
+### Why `volatile` Is Required
+
+Without `volatile`, the CPU can **reorder instructions**. Object creation has 3 steps:
+1. Allocate memory
+2. Run constructor
+3. Assign reference to `instance`
+
+CPU can reorder to: **1 → 3 → 2**
+
+Thread 2 sees `instance != null` (step 3 done) but the constructor hasn't finished (step 2 pending) → Thread 2 uses a **half-constructed object** → silent bug.
+
+`volatile` prevents reordering — guarantees the reference is only visible after the constructor completes.
+
+### All 5 Singleton Implementations — Quick Reference
+
+| Implementation | Lazy | Thread-Safe | Notes |
+|---------------|------|-------------|-------|
+| Eager (`private static final`) | ❌ | ✅ | Simplest. Use when init is cheap. |
+| Synchronized method | ✅ | ✅ | Safe but slow — locks on every call. |
+| Double-Checked Locking | ✅ | ✅ | Production standard for expensive lazy init. `volatile` required. |
+| Static Inner Class (Holder) | ✅ | ✅ | Elegant. JVM guarantees thread safety via class loading. |
+| Enum | ✅ | ✅ | **Interview favorite.** Reflection-safe + serialization-safe. |
+
+### When to Use Which
+
+| Scenario | Use |
+|----------|-----|
+| Config loaded at startup | Eager |
+| Logger shared across app | DCL or Enum |
+| Connection pool | Enum |
+| Cache (expensive to init) | DCL or Static Inner Class |
+| Any Singleton in Java | Enum (safest default) |
+
+---
+
+### Eager vs Lazy Initialization — Key Difference
+
+| | Eager | Lazy |
+|--|-------|------|
+| **When created** | At class load time (JVM startup) | On first call to `getInstance()` |
+| **Thread safety** | ✅ Always safe — JVM guarantees class loading is atomic | ⚠️ Need extra care — use DCL or Static Inner Class |
+| **Memory** | Instance exists even if never used | Instance only created when needed |
+| **Startup time** | Slower — all eager singletons init at startup | Faster startup — defers cost |
+| **Use when** | Must be ready before first request (config, bootstrap) | Optional or expensive — init only if needed (cache, logger) |
+
+**Code comparison:**
+
+```java
+// EAGER — simple, always safe
+private static final AppConfig INSTANCE = new AppConfig();  // created at class load
+
+// LAZY (DCL) — deferred until first use
+private static volatile AppConfig INSTANCE;  // null until getInstance() called
+
+public static AppConfig getInstance() {
+    if (INSTANCE == null) {
+        synchronized (AppConfig.class) {
+            if (INSTANCE == null) INSTANCE = new AppConfig();
+        }
+    }
+    return INSTANCE;
+}
+```
+
+**Decision rule:**
+> "Will the app BREAK if this isn't initialized at startup?" → **Eager**
+> "Is this only needed sometimes, or expensive to create?" → **Lazy (DCL or Enum)**
+
+**Real examples:**
+- `AppConfig` — Eager (services need config before first request)
+- `Logger` — Lazy DCL (logging is optional, init on first log call)
+- `ConnectionPool` — Enum (thread-safe, init once, always needed)
+- `ReportCache` — Lazy (cache only needed if reports are requested)
+
+---
+
 ## Problem 4: The Anti-Singleton — When NOT to Use It
 
 ### Scenario
